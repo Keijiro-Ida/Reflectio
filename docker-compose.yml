@@ -1,0 +1,37 @@
+services:
+  app:
+    build: ./infra/php
+    volumes:
+      - ./src:/data
+  web:
+    image: nginx:1.20-alpine
+    ports:
+      - 8080:80
+    volumes:
+      - ./src:/data
+      - ./infra/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    working_dir: /data
+    depends_on:
+      - app
+  db:
+      build: ./infra/mysql
+      volumes:
+        - db-store:/var/lib/mysql
+      ports:
+      - 3306:3306
+  frontend:
+    build:
+      context: ./front
+      dockerfile: ../infra/frontend/Dockerfile
+
+    volumes:
+      - ./front:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    working_dir: /app
+    command: ["npm", "start"]
+
+
+volumes:
+  db-store:

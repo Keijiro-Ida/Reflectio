@@ -18,11 +18,11 @@ jobs:
       - name: Docker Version
         run: docker version
 
-      - name: Build Dcker Image
-        run: docker compose build
+      - name: Build Docker Image
+        run: docker compose -f docker-compose.yml -f docker-compose.app.yml -f docker-compose.db.yml build
 
       - name: Create & Start Docker Container
-        run: docker compose up -d
+        run: docker compose -f docker-compose.yml -f docker-compose.app.yml -f docker-compose.db.yml up -d
 
       - name: Wait for DB
         run: |

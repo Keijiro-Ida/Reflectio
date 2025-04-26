@@ -275,4 +275,22 @@ class ReflectionControllerTest extends TestCase
             'id' => $reflection->id,
         ]);
     }
+
+    public function test_delete_reflections_ng(): void
+    {
+        $user = User::factory()->create();
+
+        $reflection = Reflection::factory()->for($user)->create();
+
+        $this->actingAs($user);
+
+        $response = $this->deleteJson('/reflections/' . $reflection->id);
+
+        $response->assertStatus(204)
+                ->assertNoContent();
+
+        $this->assertDatabaseMissing('reflections', [
+            'id' => $reflection->id,
+        ]);
+    }
 }

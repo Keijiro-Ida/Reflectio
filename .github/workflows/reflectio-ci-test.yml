@@ -27,7 +27,7 @@ jobs:
       - name: Wait for DB
         run: |
           for i in {1..30}; do
-            docker compose exec -T app php -r 'try { new PDO("mysql:host=db;dbname=laravel", "phper", "secret"); exit(0); } catch (Exception $e) { echo "Waiting for DB...\n"; sleep(2); }'
+            docker compose exec -T app php -r 'try { new PDO("mysql:host=db;dbname=refrectio", "root", "secret"); exit(0); } catch (Exception $e) { echo "Waiting for DB...\n"; sleep(2); }'
           done
       - name: OS Version
         run:  |

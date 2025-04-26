@@ -1,4 +1,4 @@
-FROM mysql/mysql-server:8.0
+FROM mysql:8.0
 
 ENV MYSQL_DATABASE=refrectio \
   MYSQL_USER=root \

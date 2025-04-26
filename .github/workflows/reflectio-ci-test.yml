@@ -19,18 +19,15 @@ jobs:
         run: docker version
 
       - name: Build Docker Image
-        run: docker compose -f docker-compose.yml -f docker-compose.override.yml build
-
-      - name: Build Docker Image
-        run: docker compose -f docker-compose.yml -f docker-compose.override.yml build
+        run: docker compose build
 
       - name: Create & Start Docker Container
-        run: docker compose -f docker-compose.yml -f docker-compose.override.yml up -d
+        run: docker compose up -d
 
       - name: Wait for DB
         run: |
           for i in {1..30}; do
-            docker compose -f docker-compose.yml -f docker-compose.override.yml exec -T app php -r 'try { new PDO("mysql:host=db;dbname=reflectio", "root", "secret"); exit(0); } catch (Exception $e) { echo "Waiting for DB...\n"; sleep(2); }'
+            docker compose exec -T app php -r 'try { new PDO("mysql:host=db;dbname=reflectio", "root", "secret"); exit(0); } catch (Exception $e) { echo "Waiting for DB...\n"; sleep(2); }'
           done
       - name: OS Version
         run:  |

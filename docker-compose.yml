@@ -13,6 +13,12 @@ services:
     working_dir: /data
     depends_on:
       - app
+  db:
+      build: ./infra/mysql
+      volumes:
+        - db-store:/var/lib/mysql
+      ports:
+      - 3306:3306
   frontend:
     build:
       context: ./front
@@ -25,3 +31,7 @@ services:
       - "3000:3000"
     working_dir: /app
     command: ["npm", "start"]
+
+
+volumes:
+  db-store:

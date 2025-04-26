@@ -1,6 +1,6 @@
 FROM mysql:8.0
 
-ENV MYSQL_DATABASE=refrectio \
+ENV MYSQL_DATABASE=reflectio \
   MYSQL_USER=root \
   MYSQL_PASSWORD=secret \
   MYSQL_ROOT_PASSWORD=secret \

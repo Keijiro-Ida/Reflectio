@@ -3,7 +3,7 @@
 return [
     'paths' => ['*'],
     'allowed_methods' => ['*'],
-    'allowed_origins' => ['http://localhost:3000'],
+    'allowed_origins' => explode(',', env('CORS_ALLOWED_ORIGINS', '')),
     'allowed_headers' => ['*'],
     'exposed_headers' => [],
     'max_age' => 0,

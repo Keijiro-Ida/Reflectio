@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:8080', // LaravelのAPIサーバーURL
+  baseURL: process.env.REACT_APP_API_URL, // LaravelのAPIサーバーURL
   withCredentials: true, // Laravel Sanctum用のCookieを送信するため
 });
 
